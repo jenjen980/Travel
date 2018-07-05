@@ -154,14 +154,21 @@ getIdeas();
 
 var departureDate = function getDeparture() {
     $("#departure").on("change", function(){
-        console.log($(this).val())
+        ($(this).val())
     });
 };
 
 var returnDate = function getReturn(){
     $("#return").on("change", function(){
-        console.log($(this).val())
+        ($(this).val())
     });
 };
 
 // Function to calculate number of days between depature and return
+
+function getDayDeparture () {
+    var diff = new Date(departureDate - returnDate)
+    var diffDays = diff/1000/60/60/24
+}
+
+// put diffDays into API key
