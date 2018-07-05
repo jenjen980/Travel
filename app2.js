@@ -64,7 +64,7 @@ var APIKeyAviation = "4b6f40-91d38d-01a1f1-d4c66b-182e26";
 //need to add search information from button capture to the ajax call below
 function getIdeas(){
     $.ajax({
-        url: "https://api.sandbox.amadeus.com/v1.2/flights/inspiration-search?apikey=" +APIKeyAmadeus+ "&origin=MKC&departure_date="+departureDate+"--"+returnDate+"&duration=7--9&max_price=500",       
+        url: "https://api.sandbox.amadeus.com/v1.2/flights/inspiration-search?apikey=" +APIKeyAmadeus+"&origin=MKC&departure_date="+departureDate+"--"+returnDate+"&duration="+dayDepart+"--"+dayReturn+"&max_price=500",       
         method: "GET"
     })
     .then(function(response) {
@@ -154,21 +154,30 @@ getIdeas();
 
 var departureDate = function getDeparture() {
     $("#departure").on("change", function(){
-        ($(this).val())
+        return ($(this).val())
     });
 };
 
 var returnDate = function getReturn(){
     $("#return").on("change", function(){
-        ($(this).val())
+        return ($(this).val())
     });
 };
 
 // Function to calculate number of days between depature and return
 
-function getDayDeparture () {
-    var diff = new Date(departureDate - returnDate)
-    var diffDays = diff/1000/60/60/24
+var dayDepart = function getDayDeparture () {
+    var departParse = Date.parse (departuredate);
+    var departDay = departParse/86400;
+    return departDay
 }
+
+var dayReturn = function getDayReturn () {
+    var returnParse = Date.parse (returnDate)
+    var returnDay = returnParse/86400;
+    return returnDay;;
+}
+
+
 
 // put diffDays into API key
