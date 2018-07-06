@@ -3,27 +3,80 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>Where Would You Like To Travel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
+    <!-- CSS -->
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="assets/css/reset.css" /> -->
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/reset.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <!-- jQuery -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+
+    <!-- Bootstrap CDN-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+    <!-- Firebase Reference -->
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+
+    <!-- Link to Moment.js -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 </head>
 <body>
+    <div class="container">
 
-<script>
-    // Start of Initalizing Firebase
-    var config = {
-        apiKey: "AIzaSyCEkC4CfI0aI1_oCbLNDxuqjFaczr0-Y2o",
-        authDomain: "travel-app-623cb.firebaseapp.com",
-        databaseURL: "https://travel-app-623cb.firebaseio.com",
-        projectId: "travel-app-623cb",
-        storageBucket: "",
-        messagingSenderId: "532694120783"
-    };
-    firebase.initializeApp(config);
-    // End of Initalizing Firebase
-</script>
+        <br>
+    
+        <!-- Jumbotron Title -->
+        <div class="jumbotron jumbotron-fluid" style="color: black; height: 500px">
+            <div class="container">
+          <h1 class="text-center">Where do you want to go?</h1>
+          <h3 class="text-center">Enter your location and travel budget below</h3>
+          <h4 class="text-center" id="currentTime"></h4>
+            </div>
+        </div>
+          <!-- Pick your destination -->
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card card-default">
+              <div class="card-heading">
+                <div class="card-header" style="background-color: rgb(240, 174, 76); color: black">Enter your destination and budget:</div>
+              </div>
+              <div class="card-body">
+                <form>
+                  <div class="form-group row">
+                    <label for="origin">Destination City</label>
+                    <input class="form-control" id="origin" type="text">
+                  </div>
+                  <div class="form-group row">
+                    <label for="budget">Destination Budget</label>
+                    <input class="form-control" id="budget" type="text">
+                  </div>
+                  <div class="form-group row">
+                    <label for="departure">Departure Date</label>
+                    <input class="form-control" id="departure" type="date">
+                  </div>
+                  <div class="form-group row">
+                    <label for="returnDate">Return Date</label>
+                    <input class="form-control" id="returnDate" type="date">
+                  </div>
+                 
+                  <button class="btn btn-primary" id="travel" type="submit">Submit</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+      </div>
+    
+      <!-- Script -->
+      <script src="app2.js"></script> 
+     <!-- <script src="app.js"></script>  -->
+      <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-
+   
 </body>
 </html>
+
