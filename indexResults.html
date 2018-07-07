@@ -4,11 +4,11 @@
        
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Where Would You Like To Travel</title>
+    <title>Travel Schedule</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/reset.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="travelappcss.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/travelappcss.css" />
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -23,6 +23,8 @@
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 </head>
 <body>
+    
+ 
         <input type="radio" name="item" checked="checked" id="section1"/>
         <input type="radio" name="item" id="section2"/>
         <nav class="nav">
@@ -30,8 +32,8 @@
         <label class="nav__item" for="section2">2</label>
         </nav>
         <section>
-                
-              
+
+            <a href="firstpageapp.html"><button> Go Back </button></a>
 
     <div class="container">
            
@@ -72,6 +74,7 @@
           </div>
     
         <div class="card">
+        
             <div class="card-header" style="background-color: rgb(2, 2, 32); color: ghostwhite">Plane Schedule</div>
             <div class="card-body">
               <table class="table table-striped">
@@ -82,22 +85,27 @@
                     <th scope="col">Return Date</th>
                     <th scope="col">Price</th>
                     <th scope="col">Airline</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Current Temp</th>
+                    <th scope="col">Current Low</th>
+                    <th scope="col">Current High</th>
                   </tr>
                 </thead>
                 <tbody id="display"></tbody>
               </table>
+              
     
             </div>
           </div>
+          
     <br>
         </section>
     <section>
-        <h1>Coming soon!</h1>
+     <!-- <h1>Coming soon</h1> -->
     </section>
 
       <!-- Script -->
       <script src="app2.js"></script> 
-      <!-- <script src="assets/javascript/app.js"></script>  -->
       <!-- jQuery -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 

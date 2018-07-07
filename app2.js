@@ -1,5 +1,4 @@
 
-
 // VARIABLES - GLOBAL SCOPE - may not need these & they are NOT hooked to anything right now
 var newDestinationCity = ""; //pull from firebase database & need to convert city to IATA code for API search
 var newCityCode = "";
@@ -21,16 +20,16 @@ var newBudgetAmt = ""; // pull from firebase
 
 // Create a variable to reference the database
 var database = firebase.database();
-
+$(document).ready(function(){
 //Captures data from html from mouse click
   $("#travel").on("click", function(event){
     event.preventDefault();
 
     //get data from form
-    var destination = $("#origin").val().trim(); //we don't need the destination button
-    var budget = $("#budget").val().trim();
-    //var departure = $("#departure").val().trim();
-   // var returnDate = $("#returnDate").val().trim();
+    var destination = $("#destination").val(); //we don't need the destination button
+    var budget = $("#budget").val();
+    var departure = $("#departure").val().trim();
+    var returnDate = $("#returnDate").val().trim();
 
         //the push to database
         database.ref().push({
@@ -38,76 +37,71 @@ var database = firebase.database();
           budget: budget,
           departure: departure,
           returnDate: returnDate,
-          dateAdded: firebase.database.ServerValue.TIMESTAMP
-          
+          dateAdded: firebase.database.ServerValue.TIMESTAMP   
+            
       });
 
-      window.location = "bootstrap-index1.html";
+     // window.location = "indexResults.html";
+     // window.location = "index.html";
  });
-
- var departureDate = function getDeparture() {
-    $("#departure").on("change", function(){
-        return ($(this).val())
-    });
- };
  
- var returnDate = function getReturn(){
-    $("#return").on("change", function(){
-        return ($(this).val())
-    });
- };
- 
- // Function to calculate number of days between depature and return
- 
- var dayDepart = function getDayDeparture () {
-    var departParse = Date.parse (departuredate);
-    var departDay = departParse/86400;
-    return departDay
- }
-
- var dayReturn = function getDayReturn () {
-    var returnParse = Date.parse (returnDate)
-    var returnDay = returnParse/86400;
-    return returnDay;;
- }
 // Firebase watcher + initial loader
   database.ref().on("child_added", function(childSnapshot) {
-
 
     var destination = childSnapshot.val().destination; 
     var newBudget = childSnapshot.val().budget;
     var newDeparture= childSnapshot.val().departure;
-    var newReturnDatea = childSnapshot.val().returnDate; //rename or remove a from var. see note below about var name
+    var newReturnDate = childSnapshot.val().returnDate; //rename or remove a from var. see note below about var name
 
+   getIdeas(destination, newBudget, newDeparture, newReturnDate);
         // TODO:  Pass this into getIdeas
-    if(window.location.href.indexOf("bootstrap-index1.html") > -1){ getIdeas(); }
+   // if(window.location.href.indexOf("indexResults.html") > -1){ getIdeas(destination, newBudget, newDeparture, newReturnDate); }
   });
 
 
   //API KEYS
-var APIKeyAmadeus = "OfvxhHXHyaJilRi9PxAyZTudLjmcQe1c";
-var APIKeyWeather = "db42f791787c1b0ce33f7b05f03ae690";
-var APIKeyAviation = "4b6f40-91d38d-01a1f1-d4c66b-182e26";
-
-
-var origin = "MKC";
+  var APIKeyAmadeus = "OfvxhHXHyaJilRi9PxAyZTudLjmcQe1c";
+  var APIKeyWeather = "db42f791787c1b0ce33f7b05f03ae690";
+  var origin = "MKC";
 //var newDepartureDate = $("#destination").val();
-newBudgetAmt = $("#budget").val();
+  newBudgetAmt = $("#budget").val();
 
 
-// // VARIABLES - GLOBAL SCOPE - may not need these & they are NOT hooked to anything right now
-// var newDestinationCity = ""; //pull from firebase database & need to convert city to IATA code for API search
-// var newDepartureDate = "";  //pull from firebase database & verify date format from html will work for API
-// var newReturnDate = ""; // pull from firebase & verify date formate from html will work & very this var name won't conflict with same var above
-// var newBudgetAmt = ""; // pull from firebase
+//  var departureDate = function getDeparture() {
+//     $("#departure").on("change", function(){
+//         return ($(this).val())
+//     });
+//  };
+ 
+//  var dateReturn = function getReturn(){
+//     $("#returnDate").on("change", function(){
+//         return ($(this).val())
+//     });
+//  };
+ 
+// // Function to calculate number of days between depature and return
+ 
+//  var dayDepart = function getDayDeparture () {
+//     var departParse = Date.parse (departuredate);
+//     var departDay = departParse/86400;
+//     return departDay;
+//  }
+
+//  var dayReturn = function getDayReturn () {
+//     var returnParse = Date.parse (returnDate)
+//     var returnDay = returnParse/86400;
+//     return returnDay;
+//  }
 
 //need to add search information from button capture to the ajax call below
-function getIdeas(origin, departure, returnDate, minDuration, maxDuration, price){
+function getIdeas(destination, departureDate, dateReturn, dayDepart, dayReturn, price){
+//function getIdeas(origin, departure, returnDate, minDuration, maxDuration, price){
     $.ajax({
-        url: `https://api.sandbox.amadeus.com/v1.2/flights/inspiration-search?apikey=${APIKeyAmadeus}&origin=${origin}&departure_date=${departureDate}--${returnDate}&duration=${dayDepart}--${dayReturn}&max_price=${newBudgetAmt}`,       
+        //url: "https://api.sandbox.amadeus.com/v1.2/flights/inspiration-search?apikey=" +APIKeyAmadeus+ "&origin=" +origin+ "&departure_date=2018-09-06--2018-09-26&duration=7--9&max_price=" +newBudgetAmt+ "",
+        url: `https://api.sandbox.amadeus.com/v1.2/flights/inspiration-search?apikey=${APIKeyAmadeus}&origin=${origin}&departure_date=${"2018-09-06"}--${"2018-09-26"}&duration=${"7"}--${"9"}&max_price=${"500"}`,       
         method: "GET"
     })
-    //"https://api.sandbox.amadeus.com/v1.2/flights/inspiration-search?apikey=" +APIKeyAmadeus+ "&origin=MKC&departure_date="+departureDate+"--"+returnDate+"&duration="+dayDepart+"--"+dayReturn+"&max_price=500"
+   // `https://api.sandbox.amadeus.com/v1.2/flights/inspiration-search?apikey=${APIKeyAmadeus}&origin=${origin}&departure_date=${departureDate}--${returnDate}&duration=${dayDepart}--${dayReturn}&max_price=${newBudgetAmt}`,
 
     .then(function(response) {
         //for Travel
@@ -173,18 +167,6 @@ function generateTableRow(ideaResponse, cityResponse, weatherResponse){
     console.log(arguments);
     // TODO:  DO HTML here
     // pushes the getIdeas API call to the DOM as a table - I haven't fixed the IATA codes 
-    // $("#display").append(
-        // ' <tr><td>' + cityCode +
-        // ' <tr><td>' + ideaResponse.destination +
-        // ' </td><td>' + ideaResponse.depart +
-        // ' </td><td>' + ideaResponse.returnDate +
-        // ' </td><td>' + ideaResponse.prices +
-        // ' </td><td>' + ideaResponse.airline + 
-        // ' </td><td>' + cityResponse.cityName +
-        // ' </td><td>' + weatherResponse.weather +
-        // ' </td><td>' + weatherResponse.low +
-        // ' </td><td>' + weatherResponse.high + ' </td></tr>');
-
         var row = $("<tr>");
         row.append("<td>" + ideaResponse.destination + "</td>")
         row.append("<td>" + ideaResponse.departure_date + "</td>")
@@ -203,27 +185,6 @@ function generateTableRow(ideaResponse, cityResponse, weatherResponse){
         var high = weatherResponse.main.temp_max;
 
 
-
-//    var destination = response.results[i].destination;
-//         var depart = response.results[i].departure_date;
-//         var returnDate = response.results[i].return_date;
-//         var prices = response.results[i].price;
-//         var airline = response.results[i].airline;
-
-    // pushes the getIdeas API call to the DOM as a table - I haven't fixed the IATA codes 
-    // $("#display").append(
-    //     // ' <tr><td>' + cityCode +
-    //     ' <tr><td>' + newDestinationCity +
-    //     ' </td><td>' + depart +
-    //     ' </td><td>' + returnDate +
-    //     ' </td><td>' + prices +
-    //     ' </td><td>' + airline + ' </td></tr>');
-
-    // var weather = response2.main.temp;
-    // var low = response2.main.temp_min;
-    // var high = response2.main.temp_max;
-
-
-}
-
+    }
+ })
 //getIdeas(); 

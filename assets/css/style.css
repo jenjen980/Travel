@@ -1,0 +1,11 @@
+body {
+    background-image: url("../images/funky-lines.png");
+}
+
+.jumbotron {
+    margin-top: 1px;
+    background-image: url("../images/airplain.jpg");
+    background-size: cover;
+}
+
+
